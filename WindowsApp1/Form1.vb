@@ -64,8 +64,30 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim uapa As conexionmysql = New conexionmysql
-        uapa.insert("insert into calificacion(pe,po,prac,valores,prue,nota,resul,literal)values('" + txtpe.Text + "','" + txtpo.Text + "','" + txtprac.Text + "','" + txtval.Text + "','" + txtprue.Text + "','" + txtnot.Text + "','" + txtres.Text + "','" + txtlit.Text + "')")
+        Dim mo As proalm = New proalm
+        Dim da As conexionmysql = New conexionmysql
+        'Try
+
+        mo.pe = Val(txtpe.Text)
+        mo.po = Val(txtpo.Text)
+        mo.pract = Val(txtprac.Text)
+        mo.valores = Val(txtval.Text)
+        mo.prue = Val(txtprue.Text)
+        mo.nota = Val(txtnot.Text)
+        mo.resul = txtres.Text
+        mo.lit = txtlit.Text
+        da.guardar(mo)
+        MessageBox.Show("Datos Gurdados")
+
+
+        ' Catch ex As Exception
+        ' MessageBox.Show(ex.Message)
+
+        'End Try
+
+
+        'Dim uapa As conexionmysql = New conexionmysql
+        'uapa.insert("insert into calificacion(pe,po,prac,valores,prue,nota,resul,literal)values('" + txtpe.Text + "','" + txtpo.Text + "','" + txtprac.Text + "','" + txtval.Text + "','" + txtprue.Text + "','" + txtnot.Text + "','" + txtres.Text + "','" + txtlit.Text + "')")
 
 
 

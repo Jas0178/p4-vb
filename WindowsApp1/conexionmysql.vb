@@ -1,4 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Data
+
+
 Public Class conexionmysql
     Private MysqlCommand As New MySqlCommand
     Dim cmd As MySqlCommand
@@ -25,6 +28,41 @@ Public Class conexionmysql
         Catch ex As Exception
             MsgBox("Ha ocurrido un error!  " + ex.Message)
         End Try
+
+
+    End Sub
+
+
+    Public Sub guardar(mo As proalm)
+
+        Dim strl As String = "guardar"
+        cmd = New MySqlCommand(strl, con)
+        Try
+
+
+            con.Open()
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("pe", mo.pe)
+            cmd.Parameters.AddWithValue("po", mo.po)
+            cmd.Parameters.AddWithValue("prac", mo.pract)
+            cmd.Parameters.AddWithValue("valores", mo.valores)
+            cmd.Parameters.AddWithValue("prue", mo.prue)
+            cmd.Parameters.AddWithValue("nota", mo.nota)
+            cmd.Parameters.AddWithValue("resul", mo.resul)
+            cmd.Parameters.AddWithValue("lit", mo.lit)
+            cmd.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
+
+            MsgBox("Ha ocurrido un error!  " + ex.Message)
+
+
+        End Try
+
+
+
+
+
 
 
     End Sub
