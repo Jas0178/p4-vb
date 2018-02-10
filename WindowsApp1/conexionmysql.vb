@@ -52,7 +52,7 @@ Public Class conexionmysql
             cmd.Parameters.AddWithValue("lit", mo.lit)
             cmd.ExecuteNonQuery()
             con.Close()
-        Catch ex As Exception
+        Catch ex As MySqlException
 
             MsgBox("Ha ocurrido un error!  " + ex.Message)
 
