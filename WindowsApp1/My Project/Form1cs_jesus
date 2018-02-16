@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Consulta_Cchar
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            Clconexion Cbuscar = new Clconexion();
+            if (cmb_buscar.Text == ("Código"))
+            {
+                dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes where cod_client like '%" + txt_buscar.Text + "%'");
+
+
+            }
+            else if (cmb_buscar.Text == ("Nombre"))
+            {
+                dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes where nombre_client like '%" + txt_buscar + "%'");
+
+            }
+            else if (cmb_buscar.Text == ("Apellidos"))
+            {
+                dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes where apell_client like '%" + txt_buscar + "%'");
+            }
+
+            else if (cmb_buscar.Text == ("Dirección"))
+            {
+                dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes where direcc_client like '%" + txt_buscar + "%'");
+            }
+
+            else if (cmb_buscar.Text == ("Teléfono"))
+            {
+                dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes where telefono_client like '%" + txt_buscar + "%'");
+            }
+
+            else
+            {
+                MessageBox.Show("Datos no encontrados ");
+
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Clconexion Cbuscar = new Clconexion();
+            dgv_cliente.DataSource = Cbuscar.consultarClient("select * from clientes");
+        }
+
+        private void btn_guardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clac_Datosclient cdato = new Clac_Datosclient();
+                Clconexion sqlDA = new Clconexion();
+                cdato.ID = int.Parse(txt_codigo.Text);
+                cdato.nomb = txt_nombre.Text;
+                cdato.apell = txt_apellidos.Text;
+                cdato.direcc = txt_direcc.Text;
+                cdato.telef = txt_telef.Text;
+                sqlDA.guardar(cdato);
+                MessageBox.Show("Datos guardados");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+
+
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+
+
+
+
+
+
+
+        }
+
+        private void btn_nuevo_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
